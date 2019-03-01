@@ -35,12 +35,13 @@ const Brief = ({
         </div>
       </div>
       <div>
-        <label>Product Id </label>
+        <label>Product Id</label>
         <div>
           {isFetching ? (
             "loading..."
           ) : (
             <Field name="productId" component="select">
+              <option />
               {products.map(product => (
                 <option key={product.id} value={product.id}>
                   {product.name}

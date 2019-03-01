@@ -2,20 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
 import { compose } from "recompose";
-import { fetchProducts } from "../actionCreators";
+import { fetchAllProducts, fetchAllBriefs, addBrief } from "../actionCreators";
 
 import Brief from "./Brief";
 
 //  Brief form container
 class BriefContainer extends Component {
   componentDidMount = () => {
-    //fetch products at start
-    this.props.fetchProducts();
+    //fetch products & briefs at start
+    this.props.fetchAllProducts();
+    this.props.fetchAllBriefs();
   };
 
   // submiting to middleware -> Api
   submitForm = formValues => {
     console.log("submitting Form: ", formValues);
+    this.props.addBrief(formValues);
   };
 
   render() {
@@ -47,7 +49,7 @@ function mapStateToProps(state) {
 export default compose(
   connect(
     mapStateToProps,
-    { fetchProducts }
+    { fetchAllProducts, fetchAllBriefs, addBrief }
   ),
   reduxForm({ form: "brief" })
 )(BriefContainer);
