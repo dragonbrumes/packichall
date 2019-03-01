@@ -1,28 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { reduxForm } from "redux-form";
+import { reduxForm, reset } from "redux-form";
 import { compose } from "recompose";
-import { fetchAllProducts, fetchAllBriefs, addBrief } from "../actionCreators";
+import { fetchAllProducts, addBrief } from "../actionCreators";
 
 import Brief from "./Brief";
 
 //  Brief form container
 class BriefContainer extends Component {
   componentDidMount = () => {
-    //fetch products & briefs at start
+    //fetch products at start
     this.props.fetchAllProducts();
-    this.props.fetchAllBriefs();
   };
 
   // submiting to middleware -> Api
   submitForm = formValues => {
-    console.log("submitting Form: ", formValues);
     this.props.addBrief(formValues);
+    // resetting the form
+    this.props.reset("brief");
   };
 
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props;
-    const { products, isFetching } = this.props;
+    const { products, isFetchingProducts } = this.props;
 
     return (
       <div>
@@ -34,7 +34,7 @@ class BriefContainer extends Component {
           reset={reset}
           submitting={submitting}
           products={products}
-          isFetching={isFetching}
+          isFetching={isFetchingProducts}
         />
       </div>
     );
@@ -42,14 +42,14 @@ class BriefContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  const { products, isFetching } = state.brief;
-  return { products, isFetching };
+  const { products, isFetchingProducts } = state.briefForm;
+  return { products, isFetchingProducts };
 }
 
 export default compose(
   connect(
     mapStateToProps,
-    { fetchAllProducts, fetchAllBriefs, addBrief }
+    { fetchAllProducts, addBrief, reset }
   ),
   reduxForm({ form: "brief" })
 )(BriefContainer);

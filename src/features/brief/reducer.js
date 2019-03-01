@@ -1,45 +1,28 @@
 import {
-  IS_FETCHING,
-  RECEIVED_PRODUCTS,
-  RECEIVED_BRIEFS,
-  ADD_BRIEF
+  IS_FETCHING_PRODUCTS,
+  RECEIVED_PRODUCTS
 } from "../../shared/constants/ActionTypes";
 
 const initialState = {
-  isFetching: false,
-  products: [],
-  briefs: [],
-  newBrief: {}
+  isFetchingProducts: false,
+  products: []
 };
 
-const brief = (state = initialState, action) => {
+const briefForm = (state = initialState, action) => {
   switch (action.type) {
-    case IS_FETCHING:
-      console.log("IS_FETCHING");
-      return { ...state, isFetching: !state.isFetching };
+    case IS_FETCHING_PRODUCTS:
+      // console.log("IS_FETCHING");
+      return { ...state, isFetchingProducts: !state.isFetchingProducts };
     case RECEIVED_PRODUCTS:
-      console.log("RECEIVED_PRODUCTS");
+      // console.log("RECEIVED_PRODUCTS");
       return {
         ...state,
         products: action.products,
-        isFetching: !state.isFetching
-      };
-    case RECEIVED_BRIEFS:
-      console.log("RECEIVED_BRIEFS");
-      return {
-        ...state,
-        briefs: action.briefs,
-        isFetching: !state.isFetching
-      };
-    case ADD_BRIEF:
-      console.log("ADD_BRIEF");
-      return {
-        ...state,
-        newBrief: action.briefValues
+        isFetchingProducts: !state.isFetchingProducts
       };
     default:
       return state;
   }
 };
 
-export default brief;
+export default briefForm;

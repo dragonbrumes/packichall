@@ -1,7 +1,7 @@
 import React from "react";
 
 import Brief from "./features/brief";
-// import List from "./features/list";
+import List from "./features/list";
 import "./App.css";
 
 const App = () => (
@@ -10,7 +10,7 @@ const App = () => (
     <hr />
     <Brief />
     <hr />
-    {/* <List /> */}
+    <List />
   </div>
 );
 
