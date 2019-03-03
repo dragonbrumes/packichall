@@ -3,8 +3,17 @@ import { connect } from "react-redux";
 import { reduxForm, reset } from "redux-form";
 import { compose } from "recompose";
 import { fetchAllProducts, addBrief } from "../actionCreators";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
 
 import Brief from "./Brief";
+
+const styles = {
+  root: {
+    width: "100%",
+    maxWidth: 500
+  }
+};
 
 //  Brief form container
 class BriefContainer extends Component {
@@ -26,7 +35,9 @@ class BriefContainer extends Component {
 
     return (
       <div>
-        <h2>Enter your brief</h2>
+        <Typography variant="h4" gutterBottom>
+          Enter your brief
+        </Typography>
         <Brief
           onSubmit={this.submitForm}
           handleSubmit={handleSubmit}
@@ -51,5 +62,6 @@ export default compose(
     mapStateToProps,
     { fetchAllProducts, addBrief, reset }
   ),
+  withStyles(styles),
   reduxForm({ form: "brief" })
 )(BriefContainer);

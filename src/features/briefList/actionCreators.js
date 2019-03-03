@@ -21,7 +21,8 @@ export const fetchAllBriefs = () => {
     return axios
       .get("http://localhost:3001/briefs")
       .then(response => {
-        // find the product name by his id
+        // find the product name by his id (if Redux Selectors is not use)
+        /*
         const findProductName = id => {
           let product = getState().briefForm.products.find(
             element => element.id === id
@@ -32,11 +33,12 @@ export const fetchAllBriefs = () => {
         const results = response.data.map(elm => ({
           id: elm.id,
           title: elm.title,
-          productName: findProductName(elm.productId),
           comment: elm.comment
+          // productName: findProductName(elm.productId),
         }));
-
         dispatch(receivedBriefs(results));
+        */
+        dispatch(receivedBriefs(response.data));
       })
       .catch(err => {
         // Do something for an error here

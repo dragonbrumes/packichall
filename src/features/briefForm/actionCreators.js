@@ -30,10 +30,10 @@ export const fetchAllProducts = () => {
   };
 };
 
-// add a brief to store
-export const addNewBrief = values => ({
+// add a brief to store via List reducer to update list view
+export const addNewBrief = newBrief => ({
   type: types.ADD_BRIEF,
-  briefValues: values
+  briefValues: newBrief
 });
 
 export const addBrief = values => {
@@ -50,7 +50,8 @@ export const addBrief = values => {
         productId: parseInt(values.productId)
       })
       .then(response => {
-        // find the product name by his id
+        // find the product name by his id (if Redux Selectors is not use)
+        /*
         const findProductName = id => {
           let product = getState().briefForm.products.find(
             element => element.id === id
@@ -63,8 +64,10 @@ export const addBrief = values => {
           productName: findProductName(response.data.productId),
           comment: response.data.comment
         };
-        // dispatch new brief to local store
+        // dispatch new brief to List local store
         dispatch(addNewBrief(results));
+        */
+        dispatch(addNewBrief(response.data));
       })
       .catch(err => {
         console.log(err);

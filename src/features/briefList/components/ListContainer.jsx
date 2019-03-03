@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchAllBriefs } from "../actionCreators";
+import { getProductName } from "../selectors";
 
 import List from "./List";
 
@@ -17,7 +18,6 @@ class ListContainer extends Component {
     const briefsList = briefs.map(brief => (
       <List
         key={brief.id}
-        id={brief.id}
         title={brief.title}
         comment={brief.comment}
         productName={brief.productName}
@@ -34,8 +34,8 @@ class ListContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  const { briefs, isFetchingBriefs } = state.briefsList;
-  return { briefs, isFetchingBriefs };
+  const { isFetchingBriefs } = state.briefsList;
+  return { briefs: getProductName(state), isFetchingBriefs };
 }
 
 export default connect(
