@@ -1,11 +1,13 @@
 import {
   IS_FETCHING_BRIEFS,
   RECEIVED_BRIEFS,
-  ADD_BRIEF
+  ADD_BRIEF,
+  BRIEFS_FILTER
 } from "../../shared/constants/ActionTypes";
 
 const initialState = {
   isFetchingBriefs: false,
+  briefFilter: 0,
   briefs: []
 };
 
@@ -23,6 +25,11 @@ const briefslist = (state = initialState, action) => {
       return {
         ...state,
         briefs: [...state.briefs, action.briefValues]
+      };
+    case BRIEFS_FILTER:
+      return {
+        ...state,
+        briefFilter: action.briefFilter
       };
     default:
       return state;

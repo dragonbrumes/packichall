@@ -4,3 +4,4 @@ export const RECEIVED_PRODUCTS = "RECEIVED_PRODUCTS";
 export const RECEIVED_BRIEFS = "RECEIVED_BRIEFS";
 export const ADD_BRIEF = "ADD_BRIEF";
 export const HAS_UPDATED = "HAS_UPDATED";
+export const BRIEFS_FILTER = "BRIEFS_FILTER";

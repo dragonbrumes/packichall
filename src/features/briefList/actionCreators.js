@@ -46,3 +46,9 @@ export const fetchAllBriefs = () => {
       });
   };
 };
+
+// filter briefs
+export const filteredByProduct = filter => ({
+  type: types.BRIEFS_FILTER,
+  briefFilter: filter
+});

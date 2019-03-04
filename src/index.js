@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import thunk from "redux-thunk";
 import { compose, createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+// import logger from "redux-logger";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 
@@ -12,7 +13,11 @@ import "./index.css";
 import reducers from "./shared/reducers";
 
 // Add Middlewares
-const thunkMW = applyMiddleware(thunk);
+// const thunkMW = applyMiddleware(thunk);
+const middleware = [thunk];
+// if (process.env.NODE_ENV !== "production") {
+//   middleware.push(logger);
+// }
 
 // store enhancers
 const devTools = [];
@@ -21,7 +26,7 @@ if (window.devToolsExtension) {
 }
 
 const enhancers = compose(
-  thunkMW,
+  applyMiddleware(...middleware),
   ...devTools
 );
 
