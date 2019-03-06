@@ -1,5 +1,6 @@
 // filter by product
 import { createSelector } from "reselect";
+import _ from "lodash";
 
 const state = state => state;
 const briefsSelector = state => state.briefsList.briefs;
@@ -23,11 +24,14 @@ const findProductName = (state, id) => {
 // as a selector
 export const getBriefs = createSelector(
   [state, productFiltered],
-  (state, productSelected) =>
-    productSelected.map(brief => ({
+  (state, productSelected) => {
+    const ordered = _.sortBy(productSelected, o => o.id).reverse();
+    console.log(ordered);
+    return ordered.map(brief => ({
       id: brief.id,
       title: brief.title.charAt(0).toUpperCase() + brief.title.slice(1),
       comment: brief.comment,
       productName: findProductName(state, brief.productId)
-    }))
+    }));
+  }
 );
